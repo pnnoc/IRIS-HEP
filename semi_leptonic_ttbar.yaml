@@ -1,0 +1,86 @@
+#Semi-Leptonic ttbar
+INPUTS:
+  SEQUENTIAL:
+    #sequential_input_1:
+    Source:
+      #feature: 
+      mass: log_normalize
+      pt: log_normalize
+      eta: normalize
+      phi: normalize
+      btag: none
+      qgl: none
+    # Leptons:
+    #   mass: log_normalize
+    #   pt: log_normalize
+    #   eta: normalize
+    #   phi: normalize
+    #   btag: none
+    #   qgl: none
+
+  GLOBAL:
+
+
+EVENT: #
+  t1:
+    - q1
+    - q2
+    - b
+  t2:
+    - mu
+    - nu
+    - b
+
+
+PERMUTATION: #have to change structure. two W is indistinquishable
+  EVENT:
+  - [ t1, t2 ] #because of two Feynman diagram. One decays into b_top, lepton, and nuetrino. Another into b_top,a nd 2 W jets
+  t1:
+  - [ q1, q2 ] #W jets is indistinquishable
+  t2:
+  - #[ q1, q2 ] no permutation because of having all distinquishable products: b_top, lepton, neutrino
+
+REGRESSIONS:
+
+
+CLASSIFICATIONS:
+
+
+#Full hadronic ttbar
+# INPUTS:
+#   SEQUENTIAL:
+#     Source:
+#       mass: log_normalize
+#       pt: log_normalize
+#       eta: normalize
+#       phi: normalize
+#       btag: none
+#   GLOBAL:
+
+# EVENT:
+#   t1:
+#     - q1
+#     - q2
+#     - b
+#   t2:
+#     - q1
+#     - q2
+#     - b
+
+# PERMUTATIONS:
+#     EVENT:
+#       - [ t1, t2 ]
+#     t1:
+#       - [ q1, q2 ]
+#     t2:
+#       - [ q1, q2 ]
+
+# # ------------------------------------------------------------------------------
+# # REQUIRED - REGRESSIONS - List of desired features to regress from observables.
+# # ------------------------------------------------------------------------------
+# REGRESSIONS:
+
+# # -----------------------------------------------------------------------------
+# # REQUIRED - REGRESSIONS - List of desired classes to predict from observables.
+# # -----------------------------------------------------------------------------
+# CLASSIFICATIONS:
