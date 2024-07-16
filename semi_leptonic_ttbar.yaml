@@ -2,7 +2,7 @@
 INPUTS:
   SEQUENTIAL:
     #sequential_input_1:
-    Source:
+    Jets:
       #feature: 
       mass: log_normalize
       pt: log_normalize
@@ -10,26 +10,24 @@ INPUTS:
       phi: normalize
       btag: none
       qgl: none
-    # Leptons:
-    #   mass: log_normalize
-    #   pt: log_normalize
-    #   eta: normalize
-    #   phi: normalize
-    #   btag: none
-    #   qgl: none
+    Lepton:
+      mass: log_normalize
+      pt: log_normalize
+      eta: normalize
+      phi: normalize
 
   GLOBAL:
 
 
 EVENT: #
   t1:
-    - q1
-    - q2
-    - b
+    - q1: Jets
+    - q2: Jets
+    - b: Jets
   t2:
-    - mu
-    - nu
-    - b
+    - elec: Lepton #elec or mu? (After filtering, every event has 1 lepton and no mu)
+    #- nu: #need to add sequential for neutrino (maybe just taking this out of t2)
+    - b: Jets
 
 
 PERMUTATION: #have to change structure. two W is indistinquishable
@@ -84,3 +82,20 @@ CLASSIFICATIONS:
 # # REQUIRED - REGRESSIONS - List of desired classes to predict from observables.
 # # -----------------------------------------------------------------------------
 # CLASSIFICATIONS:
+
+# REGRESSIONS:
+#     EVENT: 
+#         - event_regression_1
+#         - event_regression_2
+#     event_particle_1:
+#         - PARTICLE:
+#             - event_particle_1_regression_1
+#             - event_particle_1_regression_2
+#         - decay_product_1:
+#             - decay_product_1_regression_1
+#             - decay_product_1_regression_2
+#         - decay_product_2:
+#             - decay_product_2_regression_1
+#             - decay_product_2_regression_2
+#         ...
+#     ...
