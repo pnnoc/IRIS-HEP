@@ -1,101 +1,44 @@
-#Semi-Leptonic ttbar
 INPUTS:
   SEQUENTIAL:
-    #sequential_input_1:
-    Jets:
-      #feature: 
+    Momenta:
       mass: log_normalize
       pt: log_normalize
       eta: normalize
-      phi: normalize
+
+      sin_phi: normalize
+      cos_phi: normalize
+
+      qtag: none
       btag: none
-      qgl: none
-    Lepton:
-      mass: log_normalize
-      pt: log_normalize
-      eta: normalize
-      phi: normalize
+      etag: none
+      utag: none
 
+  # ---------------------------------------------------------------------
+  # REQUIRED - GLOBAL - inputs which will have a single vector per event.
+  # ---------------------------------------------------------------------
   GLOBAL:
+    Met:
+      met: log_normalize
+      sumet: log_normalize
 
+      sin_phi: normalize
+      cos_phi: normalize
 
-EVENT: #
-  t1:
-    - q1: Jets
-    - q2: Jets
-    - b: Jets
-  t2:
-    - elec: Lepton #elec or mu? (After filtering, every event has 1 lepton and no mu)
-    #- nu: #need to add sequential for neutrino (maybe just taking this out of t2)
-    - b: Jets
+# ----------------------------------------------------------------------
+# REQUIRED - EVENT - Complete list of resonance particles and daughters.
+# ----------------------------------------------------------------------
+EVENT:
+  lt:
+    - b
 
+  ht:
+    - b
+    - q1
+    - q2
 
-PERMUTATION: #have to change structure. two W is indistinquishable
-  EVENT:
-  - [ t1, t2 ] #because of two Feynman diagram. One decays into b_top, lepton, and nuetrino. Another into b_top,a nd 2 W jets
-  t1:
-  - [ q1, q2 ] #W jets is indistinquishable
-  t2:
-  - #[ q1, q2 ] no permutation because of having all distinquishable products: b_top, lepton, neutrino
-
-REGRESSIONS:
-
-
-CLASSIFICATIONS:
-
-
-#Full hadronic ttbar
-# INPUTS:
-#   SEQUENTIAL:
-#     Source:
-#       mass: log_normalize
-#       pt: log_normalize
-#       eta: normalize
-#       phi: normalize
-#       btag: none
-#   GLOBAL:
-
-# EVENT:
-#   t1:
-#     - q1
-#     - q2
-#     - b
-#   t2:
-#     - q1
-#     - q2
-#     - b
-
-# PERMUTATIONS:
-#     EVENT:
-#       - [ t1, t2 ]
-#     t1:
-#       - [ q1, q2 ]
-#     t2:
-#       - [ q1, q2 ]
-
-# # ------------------------------------------------------------------------------
-# # REQUIRED - REGRESSIONS - List of desired features to regress from observables.
-# # ------------------------------------------------------------------------------
-# REGRESSIONS:
-
-# # -----------------------------------------------------------------------------
-# # REQUIRED - REGRESSIONS - List of desired classes to predict from observables.
-# # -----------------------------------------------------------------------------
-# CLASSIFICATIONS:
-
-# REGRESSIONS:
-#     EVENT: 
-#         - event_regression_1
-#         - event_regression_2
-#     event_particle_1:
-#         - PARTICLE:
-#             - event_particle_1_regression_1
-#             - event_particle_1_regression_2
-#         - decay_product_1:
-#             - decay_product_1_regression_1
-#             - decay_product_1_regression_2
-#         - decay_product_2:
-#             - decay_product_2_regression_1
-#             - decay_product_2_regression_2
-#         ...
-#     ...
+# ---------------------------------------------------------
+# REQUIRED KEY - PERMUTATIONS - List of valid permutations.
+# ---------------------------------------------------------
+PERMUTATIONS:
+    ht:
+      - [ q1, q2 ]
