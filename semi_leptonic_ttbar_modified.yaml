@@ -1,9 +1,7 @@
 #Semi-Leptonic ttbar
 INPUTS:
   SEQUENTIAL:
-    #sequential_input_1:
     Jets:
-      #feature: 
       mass: log_normalize
       pt: log_normalize
       eta: normalize
@@ -19,24 +17,22 @@ INPUTS:
   GLOBAL:
 
 
-EVENT: #
-  t1:
+EVENT: 
+  ht:
     - q1: Jets
     - q2: Jets
     - b: Jets
-  t2:
-    - elec: Lepton #elec or mu? (After filtering, every event has 1 lepton and no mu)
+  lt:
+    - l: Lepton #elec or mu? (After filtering, every event has 1 lepton and no mu)
     #- nu: #need to add sequential for neutrino (maybe just taking this out of t2)
     - b: Jets
 
 
 PERMUTATION: #have to change structure. two W is indistinquishable
-  EVENT:
-  - [ t1, t2 ] #because of two Feynman diagram. One decays into b_top, lepton, and nuetrino. Another into b_top,a nd 2 W jets
-  t1:
+  # EVENT:
+  # - [ t1, t2 ] #because of two Feynman diagram. One decays into b_top, lepton, and nuetrino. Another into b_top,a nd 2 W jets
+  ht:
   - [ q1, q2 ] #W jets is indistinquishable
-  t2:
-  - #[ q1, q2 ] no permutation because of having all distinquishable products: b_top, lepton, neutrino
 
 REGRESSIONS:
 
