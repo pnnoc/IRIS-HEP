@@ -50,7 +50,7 @@ def plot_distribution(dist, line = 0, label=None, range=None):
         xmax = np.percentile(dist, 99.5)
     else:
         xmin, xmax = range
-        
+    
     plt.hist(
         dist,
         bins=128,
@@ -61,6 +61,7 @@ def plot_distribution(dist, line = 0, label=None, range=None):
         label=label
     )
     plt.tight_layout()
+    
     
 def batch_to_gpu(batch):
     return tree.map_structure(lambda x: x.cuda(), batch)
